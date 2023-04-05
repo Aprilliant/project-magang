@@ -9,7 +9,9 @@ use App\Http\Controllers\PengugasanController;
 use App\Http\Controllers\DataNasabahController;
 use App\Http\Controllers\data_nasabahController;
 use App\Http\Controllers\data_pegawaiController;
+use App\Http\Controllers\nasabahController;
 use App\Http\Controllers\penugasanController;
+use App\Imports\PegawaiImport;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,3 +77,9 @@ route::get('/testing', function () {
 
 
 Route::resource('/laporan', laporanController::class)->middleware('auth');
+Route::post('/importpegawai', [data_pegawaiController::class, 'store'])->name('importpegawai');
+// Route::post('/import', 'UserController@import');
+
+Route::get('/nasabah', [nasabahController::class, 'index'])->name('nasabah.index')->middleware('auth');
+
+Route::post('/import', [nasabahController::class, 'import'])->name('import');

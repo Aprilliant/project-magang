@@ -2,11 +2,9 @@
 
 @section('content')
 
-
-
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Tambah Data Pegawai
+    Tambah Data Nasabah
 </button>
 
 <!-- Modal -->
@@ -18,7 +16,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('importpegawai') }}" method="POST" enctype="multipart/form-data">
+                <form action="/import" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <input type="file" name="file" id="file">
@@ -39,19 +37,14 @@
     </div>
 </div>
 
+
 <div class="container mt-5 ml-5 ">
     <div class="row">
         <div class="col">
             {{ $dataTable->table(['class' => $dataTableClass]) }}
-
-
         </div>
-
     </div>
-
 </div>
-
-
 @endsection
 
 @push('scripts')

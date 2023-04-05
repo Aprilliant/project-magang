@@ -29,4 +29,9 @@ class Penugasan extends Model
     {
         return $this->belongsTo(data_nasabah::class, 'nama_nasabah_id');
     }
+
+    public function nasabah()
+    {
+        return $this->belongsTo(nasabah::class, 'nama_nasabah_id');
+    }
 }

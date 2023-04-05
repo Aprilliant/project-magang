@@ -6,17 +6,10 @@
     <div class="row">
         <div class="col">
             {{ $dataTable->table(['class' => $dataTableClass]) }}
-
-
         </div>
-
     </div>
-
 </div>
-
-
 @endsection
-
 @push('scripts')
 {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 <script>
