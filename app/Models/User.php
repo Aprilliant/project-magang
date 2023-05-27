@@ -47,6 +47,6 @@ class User extends Authenticatable
 
     public function penugasan()
     {
-        return $this->hasMany(Penugasan::class, 'pegawai_id');
+        return $this->hasMany(Penugasan::class, 'user_id');
     }
 }

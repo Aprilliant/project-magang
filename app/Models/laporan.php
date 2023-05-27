@@ -21,6 +21,7 @@ class laporan extends Model
         'bukti_membayar',
         'foto_kunjungan',
         'laporan',
+        'penugasan_id',
         'longitude',
         'latitude',
     ];
@@ -29,5 +30,10 @@ class laporan extends Model
     public function pegawai()
     {
         return $this->belongsTo(pegawai::class);
+    }
+
+    public function penugasan()
+    {
+        return $this->belongsTo(Penugasan::class);
     }
 }

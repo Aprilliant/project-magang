@@ -13,8 +13,8 @@ class pegawai extends Model
     protected $guarded = [];
 
     // Pegawai mempunyai banyak laporan
-    public function penugasan()
-    {
-        return $this->hasMany(Penugasan::class, 'pegawai_id');
-    }
+    // public function penugasan()
+    // {
+    //     return $this->hasMany(Penugasan::class, 'pegawai_id');
+    // }
 }

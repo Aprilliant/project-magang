@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Penugasan;
 
 class nasabah extends Model
 {
@@ -13,6 +14,6 @@ class nasabah extends Model
 
     public function penugasan()
     {
-        return $this->hasMany(Penugasan::class, 'nama_nasabah_id');
+        return $this->hasMany(penugasan::class, 'nama_nasabah_id');
     }
 }

@@ -37,6 +37,8 @@ class laporanController extends Controller
         return view('laporan.create', [
             'pegawai' => pegawai::all(),
             'penugasan' => penugasan::all(),
+            // 'penugasan '= Penugasan::findOrFail($penugasan_id),
+
         ]);
     }
 
@@ -61,7 +63,12 @@ class laporanController extends Controller
             'laporan' => 'required',
             'longitude' => 'required',
             'latitude' => 'required',
+            'penugasan_id' => 'required'
         ]);
+
+
+
+
 
         // Simpan gambar pertama
         if ($request->hasFile('foto_kunjungan')) {
@@ -79,8 +86,31 @@ class laporanController extends Controller
 
         // $validateData['user_id'] = auth()->user()->id[90];
 
-        laporan::create($validateData);
-        return redirect('laporan')->with('success', 'Laporan berhasil ditambahkan!');
+
+
+        $valid = laporan::create([
+            'nomer_kredit' => $request->nomer_kredit,
+            'tanggal_kunjungan' => $request->tanggal_kunjungan,
+            'kondisi_nasabah' => $request->kondisi_nasabah,
+            'kondisi_barang_jaminan' => $request->kondisi_barang_jaminan,
+            'tanggal_janji_bayar' => $request->tanggal_janji_bayar, //
+            'hasil_kunjungan' => $request->hasil_kunjungan,
+            'nominal_membayar' => $request->nominal_membayar, //
+            'foto_kunjungan' => $validateData['foto_kunjungan'],
+            'bukti_membayar' =>  $validateData['bukti_membayar'],
+            'laporan' => $request->laporan,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+            'penugasan_id' => $request->penugasan_id
+        ]);
+
+        if ($valid instanceof laporan) {
+            $valid->penugasan()->update([
+                'status' => 'sudah dikunjungi'
+            ]);
+            // $valid->penugasan()->attach($request->penugasan_id);
+        }
+        return redirect('/laporan')->with('success', 'Laporan berhasil ditambahkan!');
     }
 
     /**

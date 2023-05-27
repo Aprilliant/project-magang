@@ -9,6 +9,7 @@ use App\Models\Penugasan;
 use App\Models\data_nasabah;
 use Illuminate\Http\Request;
 use App\DataTables\data_nasabahDataTable;
+use Termwind\Components\Dd;
 
 class penugasanController extends Controller
 {
@@ -17,13 +18,18 @@ class penugasanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         // $pegawai = pegawai::all();
         $user = User::all();
         $nasabah = nasabah::all();
-        $penugasan = penugasan::where('user_id', auth()->user()->id)->get();
-        return view('penugasan', compact('user', 'nasabah', 'penugasan'));
+        $penugasan = Penugasan::where('user_id', auth()->user()->id)->get();
+        return view('penugasan.index', compact('user', 'nasabah', 'penugasan'));
     }
 
     /**
@@ -45,6 +51,14 @@ class penugasanController extends Controller
         ]);
     }
 
+    public function submit($id)
+    {
+        $penugasan = Penugasan::with('User', 'nasabah')->findOrFail($id);
+
+        return view('laporan.create', [
+            'penugasan' => $penugasan
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -53,18 +67,46 @@ class penugasanController extends Controller
      */
     public function store(Request $request)
     {
-        $pegawai = User::find($request->user_id);
-        $nasabah_id = $request->nama_nasabah_id;
 
-        foreach ($nasabah_id as $id) {
-            $nasabah = nasabah::find($id);
-            $penugasan = new Penugasan;
-            $penugasan->User()->associate($pegawai);
+        $validated = $request->validate([
+            'user_id' => 'required|integer',
+            'nama_nasabah_id' => 'required|array',
+
+        ]);
+
+        $user = User::findOrFail($validated['user_id']);
+        foreach ($validated['nama_nasabah_id'] as $id) {
+            $nasabah = nasabah::findOrFail($id);
+            $penugasan = new Penugasan();
+            $penugasan->User()->associate($user);
             $penugasan->nasabah()->associate($nasabah);
+
+
             $penugasan->save();
         }
 
+
+
+        // dd('Penugasan berhasil disimpan: User: ' . $user->name . ' Nasabah: ' . $nasabah->nama_nasabah);
+
         return redirect()->back();
+
+
+        // return redirect('/penugasan')->with('success', 'Data Berhasil Ditambahkan');
+
+
+        // $pegawai = User::find($request->user_id);
+        // $nasabah_id = $request->nama_nasabah_id;
+
+        // foreach ($nasabah_id as $id) {
+        //     $nasabah = nasabah::find($id);
+        //     $penugasan = new Penugasan;
+        //     $penugasan->User()->associate($pegawai);
+        //     $penugasan->nasabah()->associate($nasabah);
+        //     $penugasan->save();
+        // }
+
+        // return redirect('/penugasan')->with('success', 'Data Berhasil Ditambahkan');
         // $validateData = $request->validate([
         //     'user_id' => 'required',
         //     'nama_nasabah_id' => 'required',
@@ -75,6 +117,12 @@ class penugasanController extends Controller
         // Penugasan::create($validateData);
         // return redirect('/penugasan')->with('success', 'Data Berhasil Ditambahkan');
     }
+
+
+
+
+
+
 
     /**
      * Display the specified resource.

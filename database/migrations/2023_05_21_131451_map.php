@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('penugasan', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_pegawai')->nullable();
-            $table->string('deskripsi');
-            $table->string('nama_nasabah')->nullable();
-            $table->timestamps();
+        Schema::table('laporan', function (Blueprint $table) {
+            $table->string('longitude');
+            $table->string('latitude');
         });
     }
 
@@ -29,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penugasan');
+        Schema::table('laporan', function (Blueprint $table) {
+            //
+        });
     }
 };

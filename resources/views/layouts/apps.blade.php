@@ -14,9 +14,10 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ asset('bower_components/chosen/chosen.min.css') }}">
+    {{--
+    <link rel="stylesheet" href="{{ asset('bower_components/chosen/chosen.min.css') }}"> --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="{{ asset('bower_components/chosen/chosen.jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('bower_components/chosen/chosen.jquery.min.js') }}"></script> --}}
 
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/css/autoComplete.min.css">
@@ -28,15 +29,20 @@
 
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+    {{--
+    <link rel="stylesheet" href="/resources/demos/style.css"> --}}
+    {{--
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" /> --}}
 
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{--
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    --}}
 
     <!-- include summernote css/js-->
-    <link href="summernote-bs5.css" rel="stylesheet">
+    {{--
+    <link href="summernote-bs5.css" rel="stylesheet"> --}}
 
 
 
@@ -45,7 +51,8 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
     {{-- summernote --}}
-    <link href="summernote-bs5.css" rel="stylesheet">
+    {{--
+    <link href="summernote-bs5.css" rel="stylesheet"> --}}
 
     <link rel="stylesheet" href="">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
@@ -163,20 +170,8 @@
             class="bi bi-arrow-up-short"></i></a>
 
 
-    <script>
-        <script type="text/javascript">
-                var route = "{{ url('autocomplete-search') }}";
-                $('#search').typeahead({
-                    source: function (query, process) {
-                        return $.get(route, {
-                            query: query
-                        }, function (data) {
-                            return process(data);
-                        });
-                    }
-                });
-    </script>
-    <script src="summernote-bs5.js"></script>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
         integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -211,25 +206,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js">
     </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdnjs.com/libraries/bootstrap-3-typeahead"></script>
 
 
 
 
-    <script>
-        <script type="text/javascript">
-        var route = "{{ url('autocomplete-search') }}";
-        $('#search').typeahead({
-            source: function (query, process) {
-                return $.get(route, {
-                    query: query
-                }, function (data) {
-                    return process(data);
-                });
-            }
-        });
-    </script>
-    </script>
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -239,7 +221,7 @@
 
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 
-    @stack('scripts1')
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
@@ -247,40 +229,23 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script>
-        $(function(){
-		$('#datepicker').datepicker();
-	});
-    </script>
+
 
 
 
 
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+
+    @stack('scripts1')
+
     @stack('scripts')
 
-    <script>
-        FilePond.registerPlugin(
-  FilePondPluginFileEncode,
-	FilePondPluginFileValidateSize,
-	FilePondPluginImageExifOrientation,
-  FilePondPluginImagePreview
-);
-
-// Select the file input and use create() to turn it into a pond
-FilePond.create(
-	document.querySelector('input')
-);
-    </script>
 
 
-    <script>
-        $(document).ready(function() {
-            $('.summernote').summernote({
-                height:100
-            });
-        });
-    </script>
+
 
 </body>
 

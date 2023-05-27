@@ -47,6 +47,7 @@ Route::get('/data_pegawai', [data_pegawaiController::class, 'index'])->name('dat
 
 // Route::get('/penugasan', [PengugasanController::class, 'index'])->middleware('auth');
 Route::resource('/penugasan', penugasanController::class)->middleware('auth');
+Route::get('/penugasan/{penugasan}/create}', [PenugasanController::class, 'submit'])->name('penugasan.submit')->middleware('auth');
 Route::get('/autocomplete-search', [PengugasanController::class, 'autocompleteSearch']);
 
 

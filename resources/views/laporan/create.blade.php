@@ -2,7 +2,7 @@
 @section('content')
 
 
-<h1 class="">Input Laporan tes</h1>
+<h1 class="">Input Laporan Kunjun</h1>
 <a href="/penugasan"><button type="button" class="btn btn-primary btn-sm mb-3">Kembali</button></a>
 <form action="/laporan" enctype="multipart/form-data" method="POST">
     @csrf
@@ -14,9 +14,14 @@
                     <label for="nama_petugas">Nama Petugas</label>
                     <input type="text" id="nama_petugas" name="nama_petugas" value="{{ $nama_petugas }}" readonly>
                 </div> --}}
+
+                <input type="hidden" name="penugasan_id" value="{{ $penugasan->id }}">
                 <div class="mb-4">
+
                     <label for="nik_bpoc" class="form-label">NIK BPOC</label>
-                    <select id="nik_bpoc" class="form-select" aria-label="Default select example" name="nik_bpoc">
+                    <input type="text" class="form-control" id="nik_bpoc" value="{{ $penugasan->User->nik }}">
+
+                    {{-- <select id="nik_bpoc" class="form-select" aria-label="Default select example" name="nik_bpoc">
                         <option selected>Pilih NIK BPOC</option>
                         @foreach ($penugasan as $gawai)
                         <option value="{{ $gawai->name}}">{{ $gawai->user->nik }} - {{
@@ -24,18 +29,19 @@
 
                         </option>
                         @endforeach
-                    </select>
+                    </select> --}}
+
                 </div>
                 <div class="mb-4">
                     <label for="tanggal_kunjungan">Tanggal Kunjungan:</label>
                     <input type="text" class="form-control" id="tanggal_kunjungan" placeholder="dd-mm-yyyy"
-                        name="tanggal_kunjungan">
+                        name="tanggal_kunjungan" required>
                 </div>
 
                 <div class="mb-4">
                     <label for="kondisi_nasabah" class="form-label">Kondisi Nasabah</label>
                     <select id="kondisi_nasabah" class="form-select" aria-label="Default select example"
-                        name="kondisi_nasabah">
+                        name="kondisi_nasabah" required>
                         <option selected>Pilih</option>
                         <option value="Koperatif">Koperatif</option>
                         <option value="Tidak Koperatif">Tidak Koperatif</option>
@@ -45,7 +51,7 @@
                 <div class="mb-4">
                     <label for="kondisi_barang_jaminan" class="form-label">Kondisi Barang Jaminan</label>
                     <select id="kondisi_barang_jaminan" class="form-select" aria-label="Default select example"
-                        name="kondisi_barang_jaminan">
+                        name="kondisi_barang_jaminan" required>
                         <option selected>Pilih</option>
                         <option value="Ada,Dikuasai Nasabah">Ada,Dikuasai Nasabah</option>
                         <option value="Dipindah tangankan ke pihak ke 3">Dipindah tangankan ke pihak ke 3</option>
@@ -56,7 +62,7 @@
                 <div class="mb-4">
                     <label for="tanggal_janji_bayar">Tanggal Janji Bayar:</label>
                     <input type="text" class="form-control" id="tanggal_janji_bayar" placeholder="dd-mm-yyyy"
-                        name="tanggal_janji_bayar">
+                        name="tanggal_janji_bayar" required>
                 </div>
 
 
@@ -66,13 +72,13 @@
                 <div class="mb-4">
                     <label for="nomer_kredit" class="form-label">Nomor Kredit</label>
                     <input id="nomer_kredit" type="text" class="form-control" placeholder="Nomor Kredit"
-                        name="nomer_kredit">
+                        name="nomer_kredit" value="{{ $penugasan->nasabah->nomor_kredit }}">
                 </div>
 
                 <div class="mb-4">
                     <label for="hasil_kunjungan" class="form-label">Hasil Kunjungan</label>
                     <select id="hasil_kunjungan" class="form-select" aria-label="Default select example"
-                        name="hasil_kunjungan">
+                        name="hasil_kunjungan" required>
                         <option selected>Pilih</option>
                         <option value="Nasabah Bayar">Nasabah Bayar</option>
                         <option value="Nasabah Janji Bayar">Nasabah Janji Bayar</option>
@@ -83,7 +89,7 @@
                 <div class="mb-4">
                     <label for="nominal_membayar" class="form-label">Nominal Membayar</label>
                     <input type="text" class="form-control" id="nominal_membayar" placeholder="Nama Nasabah"
-                        name="nominal_membayar">
+                        name="nominal_membayar" required>
                 </div>
 
                 <div class=" mb-4">
@@ -94,7 +100,7 @@
 
                 <div class=" mb-4">
                     <label for="foto_kujungan" class="form-label">Foto Kunjungan</label>
-                    <input type="file" class="form-control" id="foto_kunjungan" name="foto_kunjungan">
+                    <input type="file" class="form-control" id="foto_kunjungan" name="foto_kunjungan" required>
                 </div>
             </div>
 
@@ -113,7 +119,7 @@
             </div>
 
             <div>
-                <button type="submit" onclick="swal('Good job!', 'Laporan Berhasil Dibuat!', 'success')" class=" btn
+                <button type="submit" class=" btn
                     btn-primary">Submit</button>
             </div>
 
@@ -133,105 +139,6 @@
 </form>
 
 
-{{--
-<div class="mx-3">
-    <h1 class="">Input Laporan tes</h1>
-    <a href="/penugasan"><button type="button" class="btn btn-primary btn-sm mb-3">Kembali</button></a>
-
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">NIK BPOC</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Pilih NIK BPOC</option>
-            @foreach ($pegawai as $npoc)
-            <option value="1">{{ $npoc->nik_bpoc }}</option>
-            @endforeach
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Nama BPO</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Pilih Nama BPO</option>
-            @foreach ($pegawai as $npoc)
-            <option value="1">{{ $npoc->nama_bpo }}</option>
-            @endforeach
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label for="datepicker">Tanggal Kunjungan:</label>
-        <input type="text" class="form-control" id="datepicker" placeholder="dd-mm-yyyy">
-    </div>
-
-
-
-
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Nomor Kredit</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nomor Kredit">
-    </div>
-
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Kondisi Nasabah</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Pilih</option>
-            <option value="1">Koperatif</option>
-            <option value="2">Tidak Koperatif</option>
-        </select>
-    </div>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Kondisi Barang Jaminan</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Pilih</option>
-            <option value="1">Ada,Dikuasai Nasabah</option>
-            <option value="2">Dipindah tangankan ke pihak ke 3</option>
-            <option value="3">Hilang</option>
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Hasil Kunjungan</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Pilih</option>
-            <option value="1">Nasabah Bayar</option>
-            <option value="2">Nasabah Janji Bayar</option>
-            <option value="3">Eksekusi Barang Jaminan</option>
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label for="datepicker">Tanggal Janji Bayar:</label>
-        <input type="text" class="form-control" id="datepicker" placeholder="dd-mm-yyyy">
-    </div>
-
-
-
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Nominal Membayar</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nama Nasabah">
-    </div>
-
-    <div class="input-group mb-3">
-        <input type="file" class="filepond" name="filepond" multiple data-max-file-size="3MB" data-max-files="3" />
-    </div>
-
-    <div class="form-check mb-3">
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-        <label class="form-check-label" for="defaultCheck1">
-            Taging Lokasi Nasabah
-        </label>
-    </div>
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Hasil Laporan</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-
-
-
-    <div>
-        <button type="button" class="btn btn-primary">Submit</button>
-    </div>
-</div> --}}
 
 @push('scripts')
 <script>

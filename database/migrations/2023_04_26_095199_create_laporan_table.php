@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('bukti_membayar');
             $table->string('foto_kunjungan');
             $table->string('laporan');
-            // $table->foreignId('id_pegawai')->constrained('pegawai');
+            $table->foreignId('penugasan_id')->constrained('penugasan')->onDelete('cascade');
             $table->timestamps();
         });
     }

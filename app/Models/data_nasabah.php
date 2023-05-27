@@ -23,8 +23,8 @@ class data_nasabah extends Model
     // ];
 
     // Data nasabah mempunyai banyak penugasan
-    public function penugasan()
-    {
-        return $this->hasMany(Penugasan::class, 'nama_nasabah_id');
-    }
+    // public function penugasan()
+    // {
+    //     return $this->hasMany(Penugasan::class, 'nama_nasabah_id');
+    // }
 }
