@@ -37,4 +37,12 @@ class nasabahController extends Controller
 
         return redirect('/nasabah')->with('sukses', 'Data Berhasil Diimport!');
     }
+
+    //hapus data
+    public function destroy($id)
+    {
+
+        $nasabah = DB::table('nasabah')->where('id', $id)->delete();
+        return redirect('/nasabah')->with('sukses', 'Data Berhasil Dihapus');
+    }
 }

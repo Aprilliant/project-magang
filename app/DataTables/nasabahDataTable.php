@@ -23,7 +23,7 @@ class nasabahDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'detail')
+            ->addColumn('action', 'action.data_nasabah_action')
             ->setRowId('id');
     }
 

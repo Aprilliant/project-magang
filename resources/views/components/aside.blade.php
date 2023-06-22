@@ -52,6 +52,23 @@
         @endif
         @endauth
 
+        <li class="nav-item ">
+            <a class="nav-link collapsed " href="{{ url('/nasabah-gadai/create') }}">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Input Data Nasabah</span>
+            </a>
+        </li>
+
+        <li class="nav-item ">
+            <a class="nav-link collapsed " href="{{ url('/nasabah-gadai') }}">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Data Nasabah Gadai</span>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link collapsed " href="{{ url('/wa') }}">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Isi Whatsapp</span>
+            </a>
+        </li>
+
 
 
 

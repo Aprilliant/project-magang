@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\data_nasabah;
+use App\Models\nasabah_gadai;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class data_nasabahDataTable extends DataTable
+class nasabah_gadaiDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -23,17 +23,17 @@ class data_nasabahDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', '')
+            ->addColumn('action', 'action.chat_action')
             ->setRowId('id');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\data_nasabah $model
+     * @param \App\Models\nasabah_gadai $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(data_nasabah $model): QueryBuilder
+    public function query(nasabah_gadai $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -46,28 +46,19 @@ class data_nasabahDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('data_nasabah-table')
+            ->setTableId('nasabah_gadai-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
             ->orderBy(1)
-            // ->selectStyleSingle('multi+shift')
-            // ->select([
-            //     'style' => 'multi+shift,single',
-            //     'selector' => 'td:first-child input[type=checkbox]',
-            // ])
+            ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
                 Button::make('csv'),
                 Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
-                Button::make('reload'),
-                Button::make('collection')->text('<i class="fa fa-check"></i> &nbsp;Select')
-                    ->buttons([
-                        Button::make('selectAll')->text('Select All'),
-                        Button::make('selectNone')->text('Select None'),
-                    ])
+                Button::make('reload')
             ]);
     }
 
@@ -83,19 +74,11 @@ class data_nasabahDataTable extends DataTable
                 ->exportable(true)
                 ->printable(true)
                 ->width(60)
-                ->selectable(true)
                 ->addClass('text-center'),
-            Column::checkbox('checkbox')->name('checkbox')->data('function(row) {
-                        return "<input type=\"checkbox\" name=\"nasabah[]\" value=\"" + row.id + "\">";
-                    }')->title('<input type="checkbox" id="checkAll">')->addClass('text-center')->orderable(false)->searchable(false)->selectable(true),
-            Column::make('no_kredit'),
-            Column::make('nama'),
+            Column::make('nama_nasabah'),
             Column::make('alamat'),
-            Column::make('no_hp'),
-            Column::make('hari_tunggakan'),
-            Column::make('osl'),
-            Column::make('angsuran'),
-            Column::make('kewajiban'),
+            Column::make('nomer_hp'),
+            Column::make('tanggal_lahir'),
         ];
     }
 
@@ -106,6 +89,6 @@ class data_nasabahDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'data_nasabah_' . date('YmdHis');
+        return 'nasabah_gadai_' . date('YmdHis');
     }
 }

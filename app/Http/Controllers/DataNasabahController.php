@@ -20,4 +20,11 @@ class DataNasabahController extends Controller
     //     Excel::import(new NasabahImport, $file);
     //     return redirect('/nasabah')->with('success', 'Data berhasil diimport!');
     // }
+
+    public function destroy($id)
+    {
+        $nasabah = data_nasabah::find($id);
+        $nasabah->delete();
+        return redirect('/nasabah')->with('success', 'Data Berhasil Dihapus');
+    }
 }
